@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CarRental.Application.DTOs.Conversation
+{
+    public class CreateConversationDTO
+    {
+        public string UserId { get; set; } = string.Empty;
+    }
+}
