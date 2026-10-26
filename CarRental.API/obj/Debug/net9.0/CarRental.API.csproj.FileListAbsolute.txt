@@ -183,3 +183,4 @@ D:\ASP .NET\API\Car Rental System\CarRental.API\bin\Debug\net9.0\Newtonsoft.Json
 D:\ASP .NET\API\Car Rental System\CarRental.API\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
 D:\ASP .NET\API\Car Rental System\CarRental.API\bin\Debug\net9.0\Stripe.net.dll
 D:\ASP .NET\API\Car Rental System\CarRental.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+D:\ASP .NET\API\Car Rental System\CarRental.API\obj\Debug\net9.0\CarRental.API.sourcelink.json

@@ -13,7 +13,6 @@ namespace CarRental.Application.DTOs.Car
 
         public string Brand { get; set; } = string.Empty;
         [Required(ErrorMessage = "Car model is required.")]
-
         public string Model { get; set; } = string.Empty;
 
         public decimal Discount { get; set; }

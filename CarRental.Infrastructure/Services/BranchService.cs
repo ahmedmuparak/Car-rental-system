@@ -87,7 +87,7 @@ namespace CarRental.Infrastructure.Services
             branch.City = model.City;
 
             context.Branches.Update(branch);
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return MapToDTO(branch);
         }

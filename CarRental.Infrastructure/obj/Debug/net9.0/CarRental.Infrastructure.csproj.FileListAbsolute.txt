@@ -17,3 +17,4 @@ D:\ASP .NET\API\Car Rental System\CarRental.Infrastructure\obj\Debug\net9.0\refi
 D:\ASP .NET\API\Car Rental System\CarRental.Infrastructure\obj\Debug\net9.0\CarRental.Infrastructure.pdb
 D:\ASP .NET\API\Car Rental System\CarRental.Infrastructure\obj\Debug\net9.0\CarRental.Infrastructure.genruntimeconfig.cache
 D:\ASP .NET\API\Car Rental System\CarRental.Infrastructure\obj\Debug\net9.0\ref\CarRental.Infrastructure.dll
+D:\ASP .NET\API\Car Rental System\CarRental.Infrastructure\obj\Debug\net9.0\CarRental.Infrastructure.sourcelink.json

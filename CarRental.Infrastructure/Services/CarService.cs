@@ -218,7 +218,10 @@ namespace CarRental.Infrastructure.Services
             car.FuelType = model.FuelType;
             car.BranchId = model.BranchId;
 
+            context.Cars.Update(car);
             await context.SaveChangesAsync();
+
+            await cacheService.RemoveAsync($"car:{id}");    
 
             return MapToDTO(car);
         }
