@@ -87,9 +87,9 @@ namespace CarRental.API.Controllers
         }
 
 
-        //[Authorize(Roles = AppRoles.Admin)]
-        //[Authorize(Roles = AppRoles.SuperAdmin)]
-        //[Authorize(Roles = AppRoles.CarOwner)]
+        [Authorize(Roles = AppRoles.Admin)]
+        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = AppRoles.CarOwner)]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateCarDTO model)
         {
