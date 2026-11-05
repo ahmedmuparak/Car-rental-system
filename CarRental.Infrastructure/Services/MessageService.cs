@@ -5,6 +5,7 @@ using CarRental.Infrastructure.Persistence;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using CarRental.Infrastructure.Hubs;
+using CarRental.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace CarRental.Infrastructure.Services
 
             if (conversation == null)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     "Conversation not found or user is not a participant.");
             }
 
@@ -67,7 +68,7 @@ namespace CarRental.Infrastructure.Services
                     (c.User1Id == senderId || c.User2Id == senderId));
             if (conversation == null)
             {
-                throw new Exception("Conversation not found or user is not a participant.");
+                throw new NotFoundException("Conversation not found or user is not a participant.");
             }
             var message = new Message
             {
@@ -104,7 +105,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!conversationExists)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     "Conversation not found or user is not a participant.");
             }
 
@@ -127,7 +128,7 @@ namespace CarRental.Infrastructure.Services
                     (c.User1Id == userId || c.User2Id == userId));
             if (!conversationExists)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     "Conversation not found or user is not a participant.");
             }
             var unreadMessages = await context.Messages
@@ -153,7 +154,7 @@ namespace CarRental.Infrastructure.Services
             var message = await context.Messages.FirstOrDefaultAsync(m => m.Id == messageId && m.SenderId == userId);
             if (message == null)
             {
-                throw new Exception("Message not found or user is not the sender.");
+                throw new NotFoundException("Message not found or user is not the sender.");
             }
             message.Content = newContent;
             await context.SaveChangesAsync();
@@ -173,7 +174,7 @@ namespace CarRental.Infrastructure.Services
             var message = await context.Messages.FirstOrDefaultAsync(m => m.Id == messageId && m.SenderId == userId);
             if (message == null)
             {
-                throw new Exception("Message not found or user is not the sender.");
+                throw new NotFoundException("Message not found or user is not the sender.");
             }
             context.Messages.Remove(message);
             await context.SaveChangesAsync();

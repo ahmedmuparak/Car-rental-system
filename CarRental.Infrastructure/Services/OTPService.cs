@@ -1,5 +1,6 @@
 ﻿using CarRental.Domain.Enums;
 using Microsoft.Extensions.Caching.Memory;
+using CarRental.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using CarRental.Application.DTOs.Auth;
 using CarRental.Application.Interfaces;
 using CarRental.Infrastructure.Identity;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CarRental.Infrastructure.Services
 {
@@ -117,7 +119,7 @@ namespace CarRental.Infrastructure.Services
                 otp.Length != 6 ||
                 !otp.All(char.IsDigit))
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "OTP must be 6 digits.");
             }
         }

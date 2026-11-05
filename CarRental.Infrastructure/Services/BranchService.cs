@@ -4,6 +4,7 @@ using CarRental.Application.Interfaces;
 using CarRental.Domain.Entities;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using CarRental.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace CarRental.Infrastructure.Services
                 .FirstOrDefaultAsync(b => b.Id == id);
             if (branch == null)
             {
-                throw new Exception("Branch not found");
+                throw new NotFoundException("Branch not found");
             }
             await cacheService.SetAsync(cacheKey, MapToDTO(branch), TimeSpan.FromMinutes(10));
             return MapToDTO(branch);
@@ -79,7 +80,7 @@ namespace CarRental.Infrastructure.Services
             var branch = await context.Branches.FirstOrDefaultAsync(b => b.Id == id);
             if (branch == null)
             {
-                throw new Exception("Branch not found");
+                throw new NotFoundException("Branch not found");
             }
 
             branch.Name = model.Name;
@@ -99,7 +100,7 @@ namespace CarRental.Infrastructure.Services
 
             if (branch == null)
             {
-                throw new Exception("Branch not found");
+                throw new NotFoundException("Branch not found");
             }
 
             var hasCars = await context.Cars

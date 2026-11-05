@@ -22,18 +22,8 @@ namespace CarRental.API.Controllers
         [HttpGet("GetAllBranches")]
         public async Task<IActionResult> GetAllBranches()
         {
-            try
-            {
                 var result = await branchService.GetAllBranchesAsync();
                 return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [Authorize(Roles = AppRoles.Admin)]
@@ -41,53 +31,23 @@ namespace CarRental.API.Controllers
         [HttpPost("CreateBranch")]
         public async Task<IActionResult> CreateBranch(CreateBranchDTO model)
         {
-            try
-            {
                 var result = await branchService.CreateBranch(model);
                 return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpGet("GetBranchById/{id}")]
         public async Task<IActionResult> GetBranchById(int id)
         {
-            try
-            {
                 var result = await branchService.GetBranchById(id);
                 return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
         [Authorize(Roles = AppRoles.Admin)]
         [Authorize(Roles = AppRoles.SuperAdmin)]
         [HttpPut("UpdateBranch/{id}")]
         public async Task<IActionResult> UpdateBranch(int id, UpdateBranchDTO model)
         {
-            try
-            {
                 var result = await branchService.UpdateBranch(id, model);
                 return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
 
@@ -96,22 +56,12 @@ namespace CarRental.API.Controllers
         [HttpDelete("DeleteBranch/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
                 await branchService.DeleteBranch(id);
 
                 return Ok(new
                 {
                     message = "Branch deleted successfully."
                 });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
     }
 }

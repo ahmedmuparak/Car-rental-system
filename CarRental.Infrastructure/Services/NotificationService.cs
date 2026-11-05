@@ -3,6 +3,7 @@ using CarRental.Application.Interfaces;
 using CarRental.Domain.Entities;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using CarRental.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace CarRental.Infrastructure.Services
             var notification = await context.Notifications.FirstOrDefaultAsync(n => n.Id == notificationId);
             if (notification == null)
             {
-                throw new Exception("Notification not found");
+                throw new NotFoundException("Notification not found");
             }
             
             notification.IsRead = true;

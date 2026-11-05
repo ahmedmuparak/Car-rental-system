@@ -26,18 +26,8 @@ namespace CarRental.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBookings()
         {
-            try
-            {
                 var bookings = await bookingService.GetAllBookings();
                 return Ok(bookings);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [Authorize(Roles = AppRoles.Employee)]
@@ -47,27 +37,14 @@ namespace CarRental.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookingById(int id)
         {
-            try
-            {
                 var booking = await bookingService.GetBookingById(id);
                 return Ok(booking);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [Authorize(Roles = AppRoles.Customer)]
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDTO createBookingDTO)
         {
-
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
                 if (string.IsNullOrEmpty(userId))
@@ -79,22 +56,12 @@ namespace CarRental.API.Controllers
                 }
                 var booking = await bookingService.CreateBooking(createBookingDTO, userId);
                 return Ok(booking);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [Authorize]
         [HttpGet("user")]
         public async Task<IActionResult> GetBookingsByUserId()
         {
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
@@ -105,14 +72,6 @@ namespace CarRental.API.Controllers
                 }
                 var bookings = await bookingService.GetBookingsByUserId(userId);
                 return Ok(bookings);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [Authorize(Roles = AppRoles.Employee)]
@@ -122,8 +81,6 @@ namespace CarRental.API.Controllers
         [HttpPatch("cancel/{id}")]
         public async Task<IActionResult> CancelBooking(int id)
         {
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
@@ -134,14 +91,6 @@ namespace CarRental.API.Controllers
                 }
                 var booking = await bookingService.CancelBooking(id,userId);
                 return Ok(booking);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
 
@@ -151,18 +100,8 @@ namespace CarRental.API.Controllers
         [HttpPatch("confirm/{id}")]
         public async Task<IActionResult> ConfirmBooking(int id)
         {
-            try
-            {
                 var booking = await bookingService.ConfirmBooking(id);
                 return Ok(booking);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
 
@@ -172,18 +111,8 @@ namespace CarRental.API.Controllers
         [HttpPatch("complete/{id}")]
         public async Task<IActionResult> CompleteBooking(int id)
         {
-            try
-            {
                 var booking = await bookingService.CompleteBooking(id);
                 return Ok(booking);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
 
@@ -193,18 +122,8 @@ namespace CarRental.API.Controllers
         [HttpPatch("payment/{id}")]
         public async Task<IActionResult> UpdatePaymentStatus(int id, PaymentStatus paymentStatus)
         {
-            try
-            {
                 var booking = await bookingService.UpdatePaymentStatus(id, paymentStatus);
                 return Ok(booking);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
 

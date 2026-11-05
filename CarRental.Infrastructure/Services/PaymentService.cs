@@ -2,6 +2,7 @@
 using CarRental.Application.Interfaces;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Enums;
+using CarRental.Application.Exceptions;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -40,18 +41,18 @@ namespace CarRental.Infrastructure.Services
 
             if (booking == null)
             {
-                throw new Exception("Booking not found.");
+                throw new NotFoundException("Booking not found.");
             }
 
             if (booking.PaymentStatus == PaymentStatus.Paid)
             {
-                throw new Exception(
+                throw new ConflictException(
                     "This booking has already been paid.");
             }
 
             if (booking.TotalPrice <= 0)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid booking amount.");
             }
 
@@ -175,7 +176,7 @@ namespace CarRental.Infrastructure.Services
             }
             catch (Exception)
             {
-                throw new Exception("Invalid Stripe webhook signature.");
+                throw new BadRequestException("Invalid Stripe webhook signature.");
             }
 
             if (stripeEvent.Type == EventTypes.CheckoutSessionCompleted)

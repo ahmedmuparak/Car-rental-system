@@ -2,6 +2,7 @@
 using CarRental.Application.Interfaces;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Enums;
+using CarRental.Application.Exceptions;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,13 +28,13 @@ namespace CarRental.Infrastructure.Services
 
             if (User == null)
             {
-                throw new Exception("User not found");
+                throw new UnauthorizedAccessException("User not found");
             }
 
             var car = await context.Cars.FindAsync(model.CarId);
             if (car == null)
             {
-                throw new Exception("Car not found");
+                throw new NotFoundException("Car not found");
             }
 
             var booking = await context.Bookings
@@ -43,25 +44,25 @@ namespace CarRental.Infrastructure.Services
 
             if (booking == null)
             {
-                throw new Exception(
+                throw new ForbiddenException(
                     "Booking not found or does not belong to this user");
             }
 
             if (booking.CarId != model.CarId)
             {
-                throw new Exception(
+                throw new ForbiddenException(
                     "This booking does not belong to this car");
             }
 
             if (booking.Status != BookingStatus.Completed)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "You can only review a completed booking");
             }
 
             if (model.Rating < 1 || model.Rating > 5)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Rating must be between 1 and 5");
             }
 
@@ -72,7 +73,7 @@ namespace CarRental.Infrastructure.Services
 
             if (existingReview)
             {
-                throw new Exception(
+                throw new ConflictException(
                     "You have already reviewed this booking");
             }
 
@@ -110,7 +111,7 @@ namespace CarRental.Infrastructure.Services
             var car = await context.Cars.FindAsync(carId);
             if (car == null)
             {
-                throw new Exception("Car not found");
+                throw new NotFoundException("Car not found");
             }
 
             var reviews = await context.Reviews
@@ -121,7 +122,7 @@ namespace CarRental.Infrastructure.Services
 
             if (reviews.Count == 0)
             {
-                throw new Exception("No reviews found for this car");
+                throw new NotFoundException("No reviews found for this car");
             }
             var reviewDTOs = reviews.Select(r => new ReviewDTO
             {
@@ -149,7 +150,7 @@ namespace CarRental.Infrastructure.Services
                 .ToList();
             if (reviews.Count == 0)
             {
-                throw new Exception("No reviews found for this user");
+                throw new NotFoundException("No reviews found for this user");
             }
             var reviewDTOs = reviews.Select(r => new ReviewDTO
             {
@@ -177,7 +178,7 @@ namespace CarRental.Infrastructure.Services
                 .FirstOrDefault();
             if (review == null)
             {
-                throw new Exception("Review not found");
+                throw new NotFoundException("Review not found");
             }
             var reviewDTO = new ReviewDTO
             {
@@ -203,7 +204,7 @@ namespace CarRental.Infrastructure.Services
                 .FirstOrDefaultAsync();
             if (review == null)
             {
-                throw new Exception("Review not found or does not belong to this user");
+                throw new NotFoundException("Review not found or does not belong to this user");
             }
             context.Reviews.Remove(review);
             await context.SaveChangesAsync();

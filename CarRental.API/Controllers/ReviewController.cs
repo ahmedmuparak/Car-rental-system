@@ -33,29 +33,15 @@ namespace CarRental.API.Controllers
                     message = "User is not authenticated"
                 });
             }
-            try
-            {
                 var review = await reviewService.CreateReview(model, userId);
                 return Ok(review);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
         }
 
         [HttpGet("car/{carId}")]
         public async Task<IActionResult> GetReviewsForCar(int carId)
         {
-            try
-            {
                 var reviews = await reviewService.GetReviewsForCar(carId);
                 return Ok(reviews);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
         }
 
         [HttpGet("user")]
@@ -69,29 +55,15 @@ namespace CarRental.API.Controllers
                     message = "User is not authenticated"
                 });
             }
-            try
-            {
                 var reviews = await reviewService.GetReviewsForUser(userId);
                 return Ok(reviews);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
         }
 
         [HttpGet("{reviewId}")]
         public async Task<IActionResult> GetReviewById(int reviewId)
         {
-            try
-            {
                 var review = await reviewService.GetReviewById(reviewId);
                 return Ok(review);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
         }
 
 
@@ -109,15 +81,8 @@ namespace CarRental.API.Controllers
                     message = "User is not authenticated"
                 });
             }
-            try
-            {
                 await reviewService.DeleteReview(reviewId, userId);
                 return Ok(new { message = "Review deleted successfully" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
         }
     }
 }

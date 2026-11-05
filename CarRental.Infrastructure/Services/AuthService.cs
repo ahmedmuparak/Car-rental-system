@@ -1,4 +1,5 @@
 ﻿using CarRental.Application.DTOs.Auth;
+using CarRental.Application.Exceptions;
 using CarRental.Application.Interfaces;
 using CarRental.Domain.Enums;
 using CarRental.Infrastructure.Identity;
@@ -59,7 +60,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!user.EmailConfirmed)
             {
-                throw new UnauthorizedAccessException(
+                throw new ForbiddenException(
                     "Please verify your email before logging in.");
             }
 
@@ -98,7 +99,7 @@ namespace CarRental.Infrastructure.Services
 
             if (existingUser != null)
             {
-                throw new Exception(
+                throw new ConflictException(
                     "Email already exists.");
             }
 
@@ -284,7 +285,7 @@ namespace CarRental.Infrastructure.Services
         {
             if (string.IsNullOrWhiteSpace(model.Email))
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Email is required.");
             }
 
@@ -297,14 +298,14 @@ namespace CarRental.Infrastructure.Services
 
             if (user == null)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     "User not found.");
             }
 
 
             if (user.EmailConfirmed)
             {
-                throw new Exception(
+                throw new ConflictException(
                     "Email is already verified.");
             }
 
@@ -318,7 +319,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!isValid)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid or expired OTP.");
             }
 
@@ -356,7 +357,7 @@ namespace CarRental.Infrastructure.Services
         {
             if (string.IsNullOrWhiteSpace(model.Email))
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Email is required.");
             }
 
@@ -369,7 +370,7 @@ namespace CarRental.Infrastructure.Services
 
             if (user == null)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid OTP request.");
             }
 
@@ -383,7 +384,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!isValid)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid or expired OTP.");
             }
 
@@ -427,7 +428,7 @@ namespace CarRental.Infrastructure.Services
             if (model.NewPassword !=
                 model.ConfirmPassword)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Passwords do not match.");
             }
 
@@ -438,7 +439,7 @@ namespace CarRental.Infrastructure.Services
 
             if (user == null)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid reset request.");
             }
 
@@ -452,7 +453,7 @@ namespace CarRental.Infrastructure.Services
                 resetCacheKey,
                 out string? storedHashedToken))
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Reset session has expired. Please request a new OTP.");
             }
 
@@ -464,7 +465,7 @@ namespace CarRental.Infrastructure.Services
             if (storedHashedToken !=
                 hashedInputToken)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid reset token.");
             }
 
@@ -514,7 +515,7 @@ namespace CarRental.Infrastructure.Services
 
             if (user == null)
             {
-                throw new Exception("User not found.");
+                throw new NotFoundException("User not found.");
             }
 
             var roles = await userManager.GetRolesAsync(user);
@@ -547,7 +548,7 @@ namespace CarRental.Infrastructure.Services
 
             if (user == null)
             {
-                throw new UnauthorizedAccessException(
+                throw new NotFoundException(
                     "User not found.");
             }
 
@@ -578,7 +579,7 @@ namespace CarRental.Infrastructure.Services
 
                 if (!allowedExtensions.Contains(extension))
                 {
-                    throw new Exception(
+                    throw new BadRequestException(
                         "Only JPG, JPEG, PNG and WEBP images are allowed.");
                 }
 
@@ -587,7 +588,7 @@ namespace CarRental.Infrastructure.Services
 
                 if (model.ProfileImage.Length > maxFileSize)
                 {
-                    throw new Exception(
+                    throw new BadRequestException(
                         "Profile image size cannot exceed 5 MB.");
                 }
 
@@ -667,7 +668,7 @@ namespace CarRental.Infrastructure.Services
         {
             if (model.NewPassword != model.ConfirmNewPassword)
             {
-                throw new Exception(
+                throw new UnauthorizedAccessException(
                     "Passwords do not match.");
             }
 
@@ -676,7 +677,7 @@ namespace CarRental.Infrastructure.Services
 
             if (user == null)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Invalid reset request.");
             }
 
@@ -703,19 +704,19 @@ namespace CarRental.Infrastructure.Services
         {
             if (string.IsNullOrWhiteSpace(model.Email))
             {
-                throw new Exception("Email is required.");
+                throw new BadRequestException("Email is required.");
             }
 
             if (string.IsNullOrWhiteSpace(model.Role))
             {
-                throw new Exception("Role is required.");
+                throw new BadRequestException("Role is required.");
             }
 
             var user = await userManager.FindByEmailAsync(model.Email);
 
             if (user == null)
             {
-                throw new Exception("User not found.");
+                throw new NotFoundException("User not found.");
             }
 
             var validRoles = new[]
@@ -729,14 +730,14 @@ namespace CarRental.Infrastructure.Services
 
             if (!validRoles.Contains(model.Role))
             {
-                throw new Exception("Invalid role.");
+                throw new BadRequestException("Invalid role.");
             }
 
             var roleExists = await roleManager.RoleExistsAsync(model.Role);
 
             if (!roleExists)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     $"Role '{model.Role}' does not exist.");
             }
 
@@ -747,7 +748,7 @@ namespace CarRental.Infrastructure.Services
 
             if (isAlreadyInRole)
             {
-                throw new Exception(
+                throw new ConflictException(
                     "User already has this role.");
             }
 
@@ -795,7 +796,7 @@ namespace CarRental.Infrastructure.Services
             var user = userManager.Users.FirstOrDefault(u => u.Email == email);
             if (user == null)
             {
-                throw new Exception("User not found.");
+                throw new NotFoundException("User not found.");
             }
 
             var roles = await userManager.GetRolesAsync(user);

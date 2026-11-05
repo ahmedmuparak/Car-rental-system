@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using System.Text;
+using CarRental.API.Middleware;
 namespace CarRental.API
 {
     public class Program
@@ -95,6 +96,12 @@ namespace CarRental.API
     builder.Configuration.GetSection("CarImages"));
 
             builder.Services.AddHttpClient<ICarImageService, CarImageService>();
+
+            // Global Exception Handler
+
+            builder.Services.AddExceptionHandler<GlobalExceptionMiddleware>();
+
+            builder.Services.AddProblemDetails();
 
             //Stripe
             builder.Services.Configure<StripeSettingsDTO>(
@@ -253,11 +260,11 @@ namespace CarRental.API
             app.UseCors("FrontendPolicy");
 
 
+            app.UseExceptionHandler();
 
             app.UseAuthentication();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
             app.MapHub<CarRental.Infrastructure.Hubs.ChatHub>("/hubs/chat");

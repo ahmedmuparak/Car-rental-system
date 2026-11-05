@@ -1,5 +1,6 @@
 ﻿using CarRental.Application.DTOs.Car;
 using CarRental.Application.DTOs.Pagination;
+using CarRental.Application.Exceptions;
 using CarRental.Application.Interfaces;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Enums;
@@ -37,7 +38,7 @@ namespace CarRental.Infrastructure.Services
             if (model.Year < 1900 ||
                 model.Year > DateTime.UtcNow.Year + 1)
             {
-                throw new Exception("Invalid car year.");
+                throw new BadRequestException("Invalid car year.");
             }
 
             var branchExists =
@@ -47,7 +48,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!branchExists)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     "Branch not found.");
             }
 
@@ -56,7 +57,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!ownerExists)
             {
-                throw new Exception("Owner not found.");
+                throw new NotFoundException("Owner not found.");
             }
 
             var imageUrl =
@@ -167,7 +168,7 @@ namespace CarRental.Infrastructure.Services
             var car = await context.Cars.FindAsync(id);
             if (car == null)
             {
-                throw new Exception("Car not found.");
+                throw new NotFoundException($"Car with ID {id} was not found.");
             }
             await cacheService.SetAsync($"{cacheKey}:{id}", MapToDTO(car), TimeSpan.FromMinutes(10));
             return MapToDTO(car);
@@ -180,7 +181,7 @@ namespace CarRental.Infrastructure.Services
             var car = await context.Cars.FindAsync(id);
             if(car == null)
             {
-                throw new Exception("Car not found.");
+                throw new NotFoundException("Car not found.");
             }
 
             var branchExists =
@@ -190,20 +191,20 @@ namespace CarRental.Infrastructure.Services
 
             if (!branchExists)
             {
-                throw new Exception(
+                throw new NotFoundException(
                     "Branch not found.");
             }
 
 
             if (model.PricePerDay <= 0)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Price per day must be greater than zero.");
             }
 
             if (model.Seats <= 0)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Seats must be greater than zero.");
             }
 
@@ -231,7 +232,8 @@ namespace CarRental.Infrastructure.Services
             var car = await context.Cars.FindAsync(id);
             if (car == null)
             {
-                throw new Exception("Car not found.");
+                throw new NotFoundException
+                    ("Car not found.");
             }
             context.Cars.Remove(car);
             await context.SaveChangesAsync();
@@ -264,7 +266,7 @@ namespace CarRental.Infrastructure.Services
 
             if (!branchExists)
             {
-                throw new Exception("Branch not found.");
+                throw new NotFoundException("Branch not found.");
             }
 
                 var cars = await context.Cars
@@ -279,11 +281,11 @@ namespace CarRental.Infrastructure.Services
             var car = await context.Cars.FindAsync(id);
             if (car == null)
             {
-                throw new Exception("Car not found.");
+                throw new NotFoundException("Car not found.");
             }
 
             car.Status = status;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return MapToDTO(car);
         }
 

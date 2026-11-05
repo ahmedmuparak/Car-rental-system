@@ -24,37 +24,17 @@ namespace CarRental.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateConversation(CreateConversationDTO model)
         {
-            try
-            {
                 var user1Id = User.FindFirstValue(ClaimTypes.NameIdentifier); 
                 var conversation = await conversationService.CreateConservation(model, user1Id);
                 return Ok(conversation);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpGet("my-conversations")]
         public async Task<IActionResult> GetMyConversations()
         {
-            try
-            {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var conversations = await conversationService.GetMyConversations(userId);
                 return Ok(conversations);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
     }
 }

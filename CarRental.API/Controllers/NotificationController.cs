@@ -21,74 +21,34 @@ namespace CarRental.API.Controllers
         [HttpGet("user")]
         public async Task<IActionResult> GetNotificationsByUserId()
         {
-            try
-            {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 var notifications = await notificationService.GetNotificationsByUserId(userId);
                 return Ok(notifications);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpPost("mark-as-read/{notificationId}")]
         public async Task<IActionResult> MarkNotificationAsRead(int notificationId)
         {
-            try
-            {
                 await notificationService.MarkNotificationAsRead(notificationId);
                 return Ok(new { message = "Notification marked as read" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpGet("unread")]
         public async Task<IActionResult> GetUnreadNotificationsByUserId()
         {
-            try
-            {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var notifications = await notificationService.GetUnreadNotificationsByUserId(userId);
                 return Ok(notifications);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpGet("unread-count")]
         public async Task<IActionResult> GetUnreadNotificationCountByUserId()
         {
-            try
-            {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 var count = await notificationService.GetUnreadNotificationCountByUserId(userId);
                 return Ok(new { unreadCount = count });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using CarRental.Domain.Entities;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using CarRental.Application.Exceptions; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace CarRental.Infrastructure.Services
             if (exists) return;
 
             var car = await context.Cars.AnyAsync(c => c.Id == carId);
-            if (!car) throw new ArgumentException("Car Not found.");
+            if (!car) throw new NotFoundException("Car Not found.");
 
             var favorite = new FavoriteList
             {
@@ -45,7 +46,7 @@ namespace CarRental.Infrastructure.Services
                 .FirstOrDefaultAsync(f => f.UserId == userId && f.CarId == carId);
             if (favorite == null) return;
             var car = await context.Cars.AnyAsync(c => c.Id == carId);
-            if (!car) throw new ArgumentException("Car Not found.");
+            if (!car) throw new NotFoundException("Car Not found.");
 
             context.FavoriteLists.Remove(favorite);
             await context.SaveChangesAsync();

@@ -7,14 +7,8 @@ using CarRental.Infrastructure.Identity;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+using CarRental.Application.Exceptions;
+
 
 namespace CarRental.Infrastructure.Services
 {
@@ -71,7 +65,7 @@ namespace CarRental.Infrastructure.Services
             ).FirstOrDefaultAsync();
             if (booking == null)
             {
-                throw new Exception("Booking not found");
+                throw new NotFoundException("Booking not found");
             }
             return MapToDTO(booking.booking, booking.user);
 
@@ -82,7 +76,7 @@ namespace CarRental.Infrastructure.Services
 
             if (createBookingDTO.EndDate <= createBookingDTO.StartDate)
             {
-                throw new Exception("End date must be greater than start date");
+                throw new BadRequestException("End date must be greater than start date");
             }
 
 
@@ -91,7 +85,7 @@ namespace CarRental.Infrastructure.Services
 
             if (customer == null)
             {
-                throw new Exception("User not found");
+                throw new NotFoundException("User not found");
             }
 
             var car = await context.Cars
@@ -99,12 +93,12 @@ namespace CarRental.Infrastructure.Services
 
             if (car == null)
             {
-                throw new Exception("Car not found");
+                throw new NotFoundException("Car not found");
             }
 
             if (car.Status != CarStatus.Available)
             {
-                throw new Exception("Car is not available");
+                throw new BadRequestException("Car is not available");
             }
 
             var pickupBranch = await context.Branches
@@ -112,7 +106,7 @@ namespace CarRental.Infrastructure.Services
 
             if (pickupBranch == null)
             {
-                throw new Exception("Pickup branch not found");
+                throw new NotFoundException("Pickup branch not found");
             }
 
             var returnBranch = await context.Branches
@@ -120,14 +114,14 @@ namespace CarRental.Infrastructure.Services
 
             if (returnBranch == null)
             {
-                throw new Exception("Return branch not found");
+                throw new NotFoundException("Return branch not found");
             }
 
             var totalDays = (createBookingDTO.EndDate - createBookingDTO.StartDate).Days;
 
             if (totalDays <= 0)
             {
-                throw new Exception("Booking duration must be at least one day");
+                throw new BadRequestException("Booking duration must be at least one day");
             }
 
             var Discount = car.Discount ?? 0;
@@ -227,23 +221,23 @@ namespace CarRental.Infrastructure.Services
             .FirstOrDefaultAsync();
             if (booking == null)
             {
-                throw new Exception("Booking not found");
+                throw new NotFoundException("Booking not found");
             }
 
             if (booking.booking.CustomerId != userId)
             {
-                throw new Exception("You are not allowed to cancel this booking");
+                throw new ForbiddenException("You are not allowed to cancel this booking");
             }
 
             if (booking.booking.Status == BookingStatus.Completed)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Completed booking cannot be cancelled");
             }
 
             if (booking.booking.Status == BookingStatus.Cancelled)
             {
-                throw new Exception(
+                throw new ConflictException(
                     "Booking is already cancelled");
             }
 
@@ -292,12 +286,12 @@ namespace CarRental.Infrastructure.Services
             .FirstOrDefaultAsync();
             if (booking == null)
             {
-                throw new Exception("Booking not found");
+                throw new NotFoundException("Booking not found");
             }
             var car = await context.Cars.FirstOrDefaultAsync(c => c.Id == booking.booking.CarId);
             if (car == null)
             {
-                throw new Exception("Car not found");
+                throw new NotFoundException("Car not found");
             }
             booking.booking.Status = BookingStatus.Confirmed;
             car.Status = CarStatus.Rented;
@@ -322,7 +316,7 @@ namespace CarRental.Infrastructure.Services
 
             if (booking == null)
             { 
-                throw new Exception("Booking not found");
+                throw new NotFoundException("Booking not found");
             }
 
             booking.booking.PaymentStatus = paymentStatus;
@@ -337,12 +331,12 @@ namespace CarRental.Infrastructure.Services
 
             if (booking == null)
             {
-                throw new Exception("Booking not found");
+                throw new NotFoundException("Booking not found");
             }
 
             if (booking.Status != BookingStatus.Confirmed)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "Only confirmed bookings can be completed");
             }
 
@@ -351,7 +345,7 @@ namespace CarRental.Infrastructure.Services
 
             if (customer == null)
             {
-                throw new Exception("Customer not found");
+                throw new ForbiddenException("Customer not found");
             }
 
             var car = await context.Cars
@@ -359,7 +353,7 @@ namespace CarRental.Infrastructure.Services
 
             if (car == null)
             {
-                throw new Exception("Car not found");
+                throw new NotFoundException("Car not found");
             }
 
             booking.Status = BookingStatus.Completed;

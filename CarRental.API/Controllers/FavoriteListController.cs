@@ -24,8 +24,6 @@ namespace CarRental.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToFavoriteList(int carId)
         {
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
@@ -36,21 +34,11 @@ namespace CarRental.API.Controllers
                 }
                 await favoriteListService.AddToFavoriteListAsync(userId, carId);
                 return Ok();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpDelete("{carId}")]
         public async Task<IActionResult> RemoveFromFavoriteList(int carId)
         {
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
@@ -61,21 +49,11 @@ namespace CarRental.API.Controllers
                 }
                 await favoriteListService.RemoveFromFavoriteListAsync(userId, carId);
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpGet]
         public async Task<IActionResult> GetFavoriteListByUserId()
         {
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
                 if (string.IsNullOrEmpty(userId))
@@ -87,21 +65,11 @@ namespace CarRental.API.Controllers
                 }
                 var favoriteList = await favoriteListService.GetFavoriteListByUserIdAsync(userId);
                 return Ok(favoriteList);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [HttpDelete("clear")]
         public async Task<IActionResult> ClearFavoriteList()
         {
-            try
-            {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
@@ -112,14 +80,6 @@ namespace CarRental.API.Controllers
                 }
                 await favoriteListService.ClearFavoriteList(userId);
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
     }
 }

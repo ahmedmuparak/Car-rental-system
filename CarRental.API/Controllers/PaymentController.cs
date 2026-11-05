@@ -26,8 +26,6 @@ namespace CarRental.API.Controllers
             CreateCheckoutSession(
                 CreateStripePaymentDTO model)
         {
-            try
-            {
                 var userId =
                     User.FindFirstValue(
                         ClaimTypes.NameIdentifier);
@@ -50,22 +48,12 @@ namespace CarRental.API.Controllers
 
 
                 return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
 
         [AllowAnonymous]
         [HttpPost("webhook")]
         public async Task<IActionResult> StripeWebhook()
         {
-            try
-            {
                 using var reader = new StreamReader(Request.Body);
 
                 var json = await reader.ReadToEndAsync();
@@ -87,14 +75,6 @@ namespace CarRental.API.Controllers
                     signature);
 
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
         }
     }
 }

@@ -8,6 +8,7 @@ using CarRental.Application.Interfaces;
 using CarRental.Domain.Entities;
 using CarRental.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using CarRental.Application.Exceptions;
 
 namespace CarRental.Infrastructure.Services
 {
@@ -29,12 +30,12 @@ namespace CarRental.Infrastructure.Services
 
             if (!user2Exists)
             {
-                throw new Exception("User not found");
+                throw new NotFoundException("User not found");
             }
 
             if (user1Id == model.UserId)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "You cannot create a conversation with yourself.");
             }
 
