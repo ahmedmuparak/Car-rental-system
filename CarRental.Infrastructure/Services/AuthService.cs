@@ -22,6 +22,7 @@ namespace CarRental.Infrastructure.Services
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IRedisService redisService;
 
         public AuthService(
             UserManager<ApplicationUser> userManager,
@@ -31,12 +32,14 @@ namespace CarRental.Infrastructure.Services
             IOTPService otpService,
             IHttpContextAccessor httpContextAccessor,
             SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IRedisService redisService)
         {
             this.userManager = userManager;
             this.tokenService = tokenService;
             this.emailService = emailService;
             this.memoryCache = memoryCache;
+            this.redisService = redisService;
             this.otpService = otpService;
             this.httpContextAccessor = httpContextAccessor;
             this.signInManager = signInManager;
@@ -209,74 +212,87 @@ namespace CarRental.Infrastructure.Services
 
         public async Task ForgotPasswordAsync(
             ForgotPasswordDTO model)
-        {
-            var user =
-                await userManager.FindByEmailAsync(
-                    model.Email);
+                {
+                    var user = await userManager.FindByEmailAsync(
+                        model.Email);
+        
+                    if (user == null)
+                        return;
+        
+                    var rateLimitKey =
+                        $"rate-limit:forgot-password:{user.Id}";
+        
+                    var requests = await redisService.IncrementAsync(
+                        rateLimitKey);
+        
+                    if (requests == 1)
+                    {
+                        await redisService.SetExpiryAsync(
+                            rateLimitKey,
+                            TimeSpan.FromMinutes(10));
+                    }
 
-            if (user == null)
-            {
-                return;
-            }
-
+                   if (requests > 3)
+                   {
+                       var ttl = await redisService.GetTtlAsync(rateLimitKey);
+               
+                       var remainingTime = ttl ?? TimeSpan.Zero;
+               
+                       var minutes = (int)remainingTime.TotalMinutes;
+                       var seconds = remainingTime.Seconds;
+               
+                       throw new BadRequestException (
+                           $"Too many requests. Please try again after {minutes} minutes and {seconds} seconds."
+                       );
+                   }
 
             var otp = otpService.GenerateOtp();
-
-
-            otpService.SaveOtp(
-                user.Email!,
-                otp,
-                OtpPurpose.PasswordReset);
-
-
-            var body = $"""
+        
+                    otpService.SaveOtp(
+                        user.Email!,
+                        otp,
+                        OtpPurpose.PasswordReset);
+        
+                    var body = $"""
                 <!DOCTYPE html>
-
                 <html>
-
                 <body style="font-family: Arial, sans-serif;">
-
+        
                     <h2>Car Rental - Password Reset</h2>
-
-                    <p>
-                        Hello {user.FullName},
-                    </p>
-
+        
+                    <p>Hello {user.FullName},</p>
+        
                     <p>
                         We received a request to reset your password.
                     </p>
-
-                    <p>
-                        Your verification code is:
-                    </p>
-
+        
+                    <p>Your verification code is:</p>
+        
                     <h1 style="
                         letter-spacing: 8px;
                         color: #007bff;
                     ">
                         {otp}
                     </h1>
-
+        
                     <p>
                         This code will expire in
                         <strong>10 minutes</strong>.
                     </p>
-
+        
                     <p>
                         If you did not request a password reset,
                         you can safely ignore this email.
                     </p>
-
+        
                 </body>
-
                 </html>
                 """;
-
-
-            await emailService.SendEmailAsync(
-                user.Email!,
-                "Car Rental - Password Reset OTP",
-                body);
+        
+                    await emailService.SendEmailAsync(
+                        user.Email!,
+                        "Car Rental - Password Reset OTP",
+                        body);
         }
 
 

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using System.Text;
 using CarRental.API.Middleware;
 namespace CarRental.API
@@ -32,13 +33,29 @@ namespace CarRental.API
                         "DefaultConnection")));
 
             // Redis Connection 
+
+            var redisConnection =
+                builder.Configuration.GetConnectionString("Redis");
+
+            if (string.IsNullOrWhiteSpace(redisConnection))
+            {
+                throw new InvalidOperationException(
+                    "Redis connection string is missing."
+                );
+            }
+
+            // 1. Register StackExchange.Redis
+            builder.Services.AddSingleton<IConnectionMultiplexer>(
+                _ => ConnectionMultiplexer.Connect(redisConnection)
+            );
+
+            // 2. Register IDistributedCache
             builder.Services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration =
-                    builder.Configuration.GetConnectionString("Redis");
-
+                options.Configuration = redisConnection;
                 options.InstanceName = "CarRental:";
             });
+
 
             // Identity
 
@@ -127,6 +144,8 @@ namespace CarRental.API
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddScoped<ICacheService, CacheService>();
+            builder.Services.AddScoped<IRedisService, RedisService>();
+
 
             // Controllers
 

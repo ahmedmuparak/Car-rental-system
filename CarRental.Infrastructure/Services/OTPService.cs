@@ -1,22 +1,24 @@
-﻿using CarRental.Domain.Enums;
-using Microsoft.Extensions.Caching.Memory;
+﻿using CarRental.Application.DTOs.Auth;
 using CarRental.Application.Exceptions;
+using CarRental.Application.Interfaces;
+using CarRental.Domain.Enums;
+using CarRental.Infrastructure.Identity;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Caching.Memory;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using CarRental.Application.DTOs.Auth;
-using CarRental.Application.Interfaces;
-using CarRental.Infrastructure.Identity;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CarRental.Infrastructure.Services
 {
     public class OTPService: IOTPService
     {
         private readonly IMemoryCache memoryCache;
+
 
         public OTPService(IMemoryCache memoryCache)
         {
@@ -123,9 +125,6 @@ namespace CarRental.Infrastructure.Services
                     "OTP must be 6 digits.");
             }
         }
-
-
-
         public  string HashValue(
             string value)
         {

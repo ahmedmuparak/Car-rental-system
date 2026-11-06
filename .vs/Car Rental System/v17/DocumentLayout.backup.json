@@ -3,48 +3,32 @@
   "WorkspaceRootPath": "D:\\ASP .NET\\API\\Car Rental System\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|d:\\asp .net\\api\\car rental system\\carrental.infrastructure\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|solutionrelative:carrental.infrastructure\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|d:\\asp .net\\api\\car rental system\\carrental.infrastructure\\services\\redisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|solutionrelative:carrental.infrastructure\\services\\redisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A82677D-35FE-431E-A6D8-4248A5246155}|CarRental.Application\\CarRental.Application.csproj|d:\\asp .net\\api\\car rental system\\carrental.application\\interfaces\\iredisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A82677D-35FE-431E-A6D8-4248A5246155}|CarRental.Application\\CarRental.Application.csproj|solutionrelative:carrental.application\\interfaces\\iredisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\favoritelistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\favoritelistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|d:\\asp .net\\api\\car rental system\\carrental.infrastructure\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|solutionrelative:carrental.infrastructure\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|d:\\asp .net\\api\\car rental system\\carrental.infrastructure\\services\\otpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2B347AB-F03A-4D72-AF78-6267496D77DE}|CarRental.Infrastructure\\CarRental.Infrastructure.csproj|solutionrelative:carrental.infrastructure\\services\\otpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\branchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\branchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|d:\\asp .net\\api\\car rental system\\carrental.api\\controllers\\admindashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{408CA745-7E64-45B0-843B-17CB339E9CE4}|CarRental.API\\CarRental.API.csproj|solutionrelative:carrental.api\\controllers\\admindashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A82677D-35FE-431E-A6D8-4248A5246155}|CarRental.Application\\CarRental.Application.csproj|d:\\asp .net\\api\\car rental system\\carrental.application\\interfaces\\iotpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A82677D-35FE-431E-A6D8-4248A5246155}|CarRental.Application\\CarRental.Application.csproj|solutionrelative:carrental.application\\interfaces\\iotpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,150 +38,94 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReviewController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\ReviewController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\ReviewController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\ReviewController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\ReviewController.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAFIAAAANAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "CarService.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\CarService.cs",
+              "RelativeDocumentMoniker": "CarRental.Infrastructure\\Services\\CarService.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\CarService.cs",
+              "RelativeToolTip": "CarRental.Infrastructure\\Services\\CarService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACMBAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T11:00:17.212Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T17:28:06.667Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PaymentController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\PaymentController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\PaymentController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\PaymentController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\PaymentController.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAgwDcAAAAJAAAAAAAAAA==",
+              "Title": "RedisService.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\RedisService.cs",
+              "RelativeDocumentMoniker": "CarRental.Infrastructure\\Services\\RedisService.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\RedisService.cs*",
+              "RelativeToolTip": "CarRental.Infrastructure\\Services\\RedisService.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwB8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:59:50.842Z",
+              "WhenOpened": "2026-11-05T17:24:28.96Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "NotificationController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\NotificationController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\NotificationController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\NotificationController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\NotificationController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwC4AAAAJAAAAAAAAAA==",
+              "Title": "IRedisService.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Application\\Interfaces\\IRedisService.cs",
+              "RelativeDocumentMoniker": "CarRental.Application\\Interfaces\\IRedisService.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Application\\Interfaces\\IRedisService.cs*",
+              "RelativeToolTip": "CarRental.Application\\Interfaces\\IRedisService.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:59:24.781Z",
+              "WhenOpened": "2026-11-05T17:24:00.401Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MessageController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\MessageController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\MessageController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\MessageController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\MessageController.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAkwD0AAAAJAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Program.cs",
+              "RelativeDocumentMoniker": "CarRental.API\\Program.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Program.cs",
+              "RelativeToolTip": "CarRental.API\\Program.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwDgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:58:16.87Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T15:07:15.008Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FavoriteListController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\FavoriteListController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\FavoriteListController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\FavoriteListController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\FavoriteListController.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAkwEcAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "CarRental.Infrastructure\\Services\\AuthService.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\AuthService.cs*",
+              "RelativeToolTip": "CarRental.Infrastructure\\Services\\AuthService.cs*",
+              "ViewState": "AgIAANsAAAAAAAAAAAAmwPMAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:57:47.875Z",
+              "WhenOpened": "2026-11-05T15:05:22.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ConversationController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\ConversationController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\ConversationController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\ConversationController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\ConversationController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwCEAAAAJAAAAAAAAAA==",
+              "Title": "OTPService.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\OTPService.cs",
+              "RelativeDocumentMoniker": "CarRental.Infrastructure\\Services\\OTPService.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Infrastructure\\Services\\OTPService.cs",
+              "RelativeToolTip": "CarRental.Infrastructure\\Services\\OTPService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:57:29.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T14:53:53.496Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "CarController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\CarController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\CarController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\CarController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\CarController.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAADwv3EAAAAJAAAAAAAAAA==",
+              "Title": "IOTPService.cs",
+              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Application\\Interfaces\\IOTPService.cs",
+              "RelativeDocumentMoniker": "CarRental.Application\\Interfaces\\IOTPService.cs",
+              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.Application\\Interfaces\\IOTPService.cs",
+              "RelativeToolTip": "CarRental.Application\\Interfaces\\IOTPService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:56:03.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BranchController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\BranchController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\BranchController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\BranchController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\BranchController.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAkwDkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:55:19.906Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BookingController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\BookingController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\BookingController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\BookingController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\BookingController.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAIwHsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:54:17.035Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAAAmwLUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:51:39.314Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AdminDashboardController.cs",
-              "DocumentMoniker": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\AdminDashboardController.cs",
-              "RelativeDocumentMoniker": "CarRental.API\\Controllers\\AdminDashboardController.cs",
-              "ToolTip": "D:\\ASP .NET\\API\\Car Rental System\\CarRental.API\\Controllers\\AdminDashboardController.cs",
-              "RelativeToolTip": "CarRental.API\\Controllers\\AdminDashboardController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwDgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T10:48:51.893Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T14:53:10.678Z"
             }
           ]
         }

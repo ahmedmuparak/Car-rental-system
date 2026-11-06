@@ -89,7 +89,7 @@
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
-              "version": "[9.0.20, )"
+              "version": "[9.0.22, )"
             },
             "StackExchange.Redis": {
               "target": "Package",
@@ -205,7 +205,7 @@
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
-              "version": "[9.0.20, )"
+              "version": "[9.0.22, )"
             },
             "StackExchange.Redis": {
               "target": "Package",
@@ -314,7 +314,7 @@
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
-              "version": "[9.0.20, )"
+              "version": "[9.0.22, )"
             },
             "StackExchange.Redis": {
               "target": "Package",
@@ -430,7 +430,7 @@
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
-              "version": "[9.0.20, )"
+              "version": "[9.0.22, )"
             },
             "StackExchange.Redis": {
               "target": "Package",

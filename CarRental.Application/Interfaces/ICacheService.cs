@@ -21,5 +21,6 @@ namespace CarRental.Application.Interfaces
         Task RemoveAsync(
             string key,
             CancellationToken cancellationToken = default);
+
     }
 }
