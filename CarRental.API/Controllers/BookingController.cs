@@ -20,9 +20,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.Employee)]
+        [Authorize(Roles = "SuperAdmin,Admin,Employee")]
         [HttpGet]
         public async Task<IActionResult> GetAllBookings()
         {
@@ -30,18 +28,27 @@ namespace CarRental.API.Controllers
                 return Ok(bookings);
         }
 
-        [Authorize(Roles = AppRoles.Employee)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles = AppRoles.Customer)]
+
+        [Authorize(Roles = "SuperAdmin,Admin,Employee,Customer")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookingById(int id)
         {
-                var booking = await bookingService.GetBookingById(id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized(new
+                {
+                    message = "User is not authenticated"
+                });
+            }
+
+            var isStaff = User.IsInRole(AppRoles.SuperAdmin) || User.IsInRole(AppRoles.Admin) || User.IsInRole(AppRoles.Employee);
+
+            var booking = await bookingService.GetBookingById(id,userId, isStaff);
                 return Ok(booking);
         }
 
-        [Authorize(Roles = AppRoles.Customer)]
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDTO createBookingDTO)
         {
@@ -62,22 +69,19 @@ namespace CarRental.API.Controllers
         [HttpGet("user")]
         public async Task<IActionResult> GetBookingsByUserId()
         {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userId))
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized(new
                 {
-                    return Unauthorized(new
-                    {
-                        message = "User is not authenticated"
-                    });
-                }
-                var bookings = await bookingService.GetBookingsByUserId(userId);
-                return Ok(bookings);
+                    message = "User is not authenticated"
+                });
+            }
+            var bookings = await bookingService.GetBookingsByUserId(userId);
+            return Ok(bookings);
         }
 
-        [Authorize(Roles = AppRoles.Employee)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles = AppRoles.Customer)]
+        [Authorize(Roles = "SuperAdmin,Admin,Employee,Customer")]
         [HttpPatch("cancel/{id}")]
         public async Task<IActionResult> CancelBooking(int id)
         {
@@ -94,9 +98,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Employee)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = "SuperAdmin,Admin,Employee")]
         [HttpPatch("confirm/{id}")]
         public async Task<IActionResult> ConfirmBooking(int id)
         {
@@ -105,9 +107,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Employee)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = "SuperAdmin,Admin,Employee")]
         [HttpPatch("complete/{id}")]
         public async Task<IActionResult> CompleteBooking(int id)
         {
@@ -116,9 +116,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Employee)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = "SuperAdmin,Admin,Employee")]
         [HttpPatch("payment/{id}")]
         public async Task<IActionResult> UpdatePaymentStatus(int id, PaymentStatus paymentStatus)
         {

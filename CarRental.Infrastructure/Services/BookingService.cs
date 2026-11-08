@@ -50,7 +50,7 @@ namespace CarRental.Infrastructure.Services
                 .ToList();
         }
 
-       public async Task<BookingDTO> GetBookingById(int id)
+       public async Task<BookingDTO> GetBookingById(int id, string userId, bool isStaff)
         {
             var booking = await (
                 from b in context.Bookings
@@ -63,10 +63,17 @@ namespace CarRental.Infrastructure.Services
                     user = user
                 }
             ).FirstOrDefaultAsync();
+
             if (booking == null)
             {
                 throw new NotFoundException("Booking not found");
             }
+
+            if(!isStaff && booking.booking.CustomerId != userId)
+            {
+                throw new ForbiddenException("You are not allowed to view this booking");
+            }
+
             return MapToDTO(booking.booking, booking.user);
 
         }
@@ -96,9 +103,23 @@ namespace CarRental.Infrastructure.Services
                 throw new NotFoundException("Car not found");
             }
 
-            if (car.Status != CarStatus.Available)
+            if (car.Status != CarStatus.Available || car.Status==CarStatus.Maintenance)
             {
                 throw new BadRequestException("Car is not available");
+            }
+
+            var hasOverlap = await context.Bookings.AnyAsync(b =>
+                b.CarId == createBookingDTO.CarId &&
+                (b.Status == BookingStatus.Pending ||
+                 b.Status == BookingStatus.Confirmed ||
+                 b.Status == BookingStatus.Active) &&
+                b.StartDate < createBookingDTO.EndDate &&
+                b.EndDate > createBookingDTO.StartDate);
+
+            if (hasOverlap)
+            {
+                throw new ConflictException(
+                    "Car is already booked for the selected dates");
             }
 
             var pickupBranch = await context.Branches
@@ -162,7 +183,7 @@ namespace CarRental.Infrastructure.Services
 
             context.Bookings.Add(booking);
 
-
+            await context.SaveChangesAsync();
 
             var admins = await userManager.GetUsersInRoleAsync("SuperAdmin");
             var employees = await userManager.GetUsersInRoleAsync("Employee");
@@ -186,7 +207,6 @@ namespace CarRental.Infrastructure.Services
             }
 
 
-            await context.SaveChangesAsync();
 
             return MapToDTO(booking, customer);
         }
@@ -241,8 +261,17 @@ namespace CarRental.Infrastructure.Services
                     "Booking is already cancelled");
             }
 
+            var wasConfirmed = booking.booking.Status == BookingStatus.Confirmed ||
+                   booking.booking.Status == BookingStatus.Active;
+
             booking.booking.Status = BookingStatus.Cancelled;
-            await carService.UpdateCarStatus(booking.booking.CarId, CarStatus.Available);
+
+
+            if (wasConfirmed)
+            {
+                await carService.UpdateCarStatus(booking.booking.CarId, CarStatus.Available);
+            }
+
 
 
             var admins = await userManager.GetUsersInRoleAsync("SuperAdmin");

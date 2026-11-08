@@ -11,7 +11,7 @@ namespace CarRental.Application.Interfaces
     public interface IBookingService
     {
         Task<List<BookingDTO>> GetAllBookings();
-        Task<BookingDTO> GetBookingById(int id);
+        Task<BookingDTO> GetBookingById(int id, string userId, bool isStaff);
         Task<BookingDTO> CreateBooking(CreateBookingDTO createBookingDTO, string userId);
         Task<List<BookingDTO>> GetBookingsByUserId(string userId);
         Task<BookingDTO> CancelBooking(int id, string userId);

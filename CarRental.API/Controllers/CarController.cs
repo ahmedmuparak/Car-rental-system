@@ -22,9 +22,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles =AppRoles.CarOwner)]
+        [Authorize(Roles = "SuperAdmin,Admin,CarOwner")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateCarDTO model)
         {
@@ -57,9 +55,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles = AppRoles.CarOwner)]
+        [Authorize(Roles = "SuperAdmin,Admin,CarOwner")]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateCarDTO model)
         {
@@ -71,9 +67,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles = AppRoles.CarOwner)]
+        [Authorize(Roles = "SuperAdmin,Admin,CarOwner")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -99,9 +93,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
-        [Authorize(Roles = AppRoles.CarOwner)]
+        [Authorize(Roles = "SuperAdmin,Admin,CarOwner")]
         [HttpPut("{id:int}/status")]
         public async Task<IActionResult> UpdateCarStatus(int id, CarStatus status)
         {

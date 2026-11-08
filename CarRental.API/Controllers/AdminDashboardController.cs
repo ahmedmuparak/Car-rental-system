@@ -7,7 +7,7 @@ namespace CarRental.API.Controllers
 {
     [Authorize(Roles = "Admin,SuperAdmin")]
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class AdminDashboardController : ControllerBase
     {
         private readonly IAdminDashboardService dashboardService;

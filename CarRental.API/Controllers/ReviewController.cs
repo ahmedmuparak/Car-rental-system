@@ -67,9 +67,8 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Customer)]
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = "SuperAdmin,Admin,Employee,Customer")]
+
         [HttpDelete("{reviewId}")]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {

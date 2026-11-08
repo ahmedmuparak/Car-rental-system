@@ -26,8 +26,7 @@ namespace CarRental.API.Controllers
                 return Ok(result);
         }
 
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("CreateBranch")]
         public async Task<IActionResult> CreateBranch(CreateBranchDTO model)
         {
@@ -51,8 +50,7 @@ namespace CarRental.API.Controllers
         }
 
 
-        [Authorize(Roles = AppRoles.Admin)]
-        [Authorize(Roles = AppRoles.SuperAdmin)]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("DeleteBranch/{id}")]
         public async Task<IActionResult> Delete(int id)
         {

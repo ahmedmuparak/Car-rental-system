@@ -688,22 +688,26 @@ namespace CarRental.Infrastructure.Services
                     "Passwords do not match.");
             }
 
+            var principal = httpContextAccessor.HttpContext?.User;
+            if(principal?.Identity?.IsAuthenticated != true)
+            {
+                throw new UnauthorizedAccessException(
+                    "User is not authenticated.");
+            }
 
-            var user = await userManager.FindByEmailAsync(model.Email);
-
+            var user = await userManager.GetUserAsync(principal);
             if (user == null)
             {
-                throw new BadRequestException(
-                    "Invalid reset request.");
+                throw new NotFoundException("User not found.");
             }
 
             var passwordValid = await userManager.CheckPasswordAsync(user, model.CurrentPassword);
-
-            if (!passwordValid)
-            {
-                throw new UnauthorizedAccessException(
-                    "Invalid password.");
+            if (!passwordValid) 
+                {
+                 throw new UnauthorizedAccessException(
+                      "Invalid password.");
             }
+
 
             var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
 

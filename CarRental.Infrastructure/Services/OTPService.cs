@@ -56,6 +56,8 @@ namespace CarRental.Infrastructure.Services
         }
 
 
+        private const int MaxOtpAttempts = 5;
+
         public bool ValidateOtp(
             string email,
             string otp,
@@ -79,8 +81,41 @@ namespace CarRental.Infrastructure.Services
                 HashValue(otp);
 
 
-            return storedHashedOtp ==
-                   hashedInputOtp;
+            if (storedHashedOtp == hashedInputOtp)
+            {
+                memoryCache.Remove(GetAttemptsCacheKey(cacheKey));
+                return true;
+            }
+
+            var attemptsKey = GetAttemptsCacheKey(cacheKey);
+            var attempts = memoryCache.GetOrCreate(
+                attemptsKey,
+                entry =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow =
+                        TimeSpan.FromMinutes(10);
+                    return 0;
+                }) + 1;
+
+            if (attempts >= MaxOtpAttempts)
+            {
+                memoryCache.Remove(cacheKey);
+                memoryCache.Remove(attemptsKey);
+            }
+            else
+            {
+                memoryCache.Set(
+                    attemptsKey,
+                    attempts,
+                    TimeSpan.FromMinutes(10));
+            }
+
+            return false;
+        }
+
+        private static string GetAttemptsCacheKey(string otpCacheKey)
+        {
+            return $"{otpCacheKey}:attempts";
         }
 
 
