@@ -9,5 +9,12 @@ namespace CarRental.Application.Interfaces
     public interface IEmailService
     {
         Task SendEmailAsync(string email,string subject,string body);
+        Task SendEmailWithAttachmentAsync(
+    string email,
+    string subject,
+    string body,
+    string attachmentFileName,
+    byte[] attachmentContent,
+    string attachmentContentType = "application/pdf");
     }
 }

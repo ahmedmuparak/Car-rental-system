@@ -145,6 +145,7 @@ namespace CarRental.API
             builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddScoped<ICacheService, CacheService>();
             builder.Services.AddScoped<IRedisService, RedisService>();
+            builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
 
             // Controllers

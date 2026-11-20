@@ -14,9 +14,14 @@ namespace CarRental.API.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService bookingService;
-        public BookingController(IBookingService bookingService)
+        private readonly IInvoiceService invoiceService;
+        private readonly ILogger<BookingController> logger;
+
+        public BookingController(IBookingService bookingService, IInvoiceService invoiceService, ILogger<BookingController> logger)
         {
             this.bookingService = bookingService;
+            this.invoiceService = invoiceService;
+            this.logger = logger;
         }
 
 
@@ -48,7 +53,7 @@ namespace CarRental.API.Controllers
                 return Ok(booking);
         }
 
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer,Employee")]
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDTO createBookingDTO)
         {
@@ -62,7 +67,18 @@ namespace CarRental.API.Controllers
                     });
                 }
                 var booking = await bookingService.CreateBooking(createBookingDTO, userId);
-                return Ok(booking);
+
+            try
+            {
+                await invoiceService.SendInvoiceEmailAsync(booking.Id);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex,
+                    "Could not send the invoice email for booking {BookingId}", booking.Id);
+            }
+
+            return Ok(booking);
         }
 
         [Authorize]

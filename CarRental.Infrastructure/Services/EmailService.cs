@@ -11,13 +11,39 @@ namespace CarRental.Infrastructure.Services
     {
         private readonly EmailSettingsDTO _settings;
 
-        public EmailService(
-            IOptions<EmailSettingsDTO> options)
+        public EmailService(IOptions<EmailSettingsDTO> options)
         {
             _settings = options.Value;
         }
 
-        public async Task SendEmailAsync(string email,string subject,string body)
+        public Task SendEmailAsync(string email, string subject, string body)
+        {
+            return SendAsync(email, subject, body, null);
+        }
+
+        public Task SendEmailWithAttachmentAsync(
+            string email,
+            string subject,
+            string body,
+            string attachmentFileName,
+            byte[] attachmentContent,
+            string attachmentContentType = "application/pdf")
+        {
+            return SendAsync(
+                email,
+                subject,
+                body,
+                builder => builder.Attachments.Add(
+                    attachmentFileName,
+                    attachmentContent,
+                    ContentType.Parse(attachmentContentType)));
+        }
+
+        private async Task SendAsync(
+            string email,
+            string subject,
+            string body,
+            Action<BodyBuilder>? configure)
         {
             var message = new MimeMessage();
 
@@ -31,10 +57,14 @@ namespace CarRental.Infrastructure.Services
 
             message.Subject = subject;
 
-            message.Body = new BodyBuilder
+            var builder = new BodyBuilder
             {
                 HtmlBody = body
-            }.ToMessageBody();
+            };
+
+            configure?.Invoke(builder);
+
+            message.Body = builder.ToMessageBody();
 
             using var smtp = new SmtpClient();
 
